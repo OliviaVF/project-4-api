@@ -13,6 +13,6 @@ Rails.application.routes.draw do
     post 'register', to: 'authentications#register'
     post 'login', to: 'authentications#login'
     post 'auth/facebook', to: 'oauth#facebook'
-    get 'events', to: 'events#get_events'
+    post 'events', to: 'events#get_events'
   end
 end

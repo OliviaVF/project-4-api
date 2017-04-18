@@ -1,10 +1,12 @@
 class EventsController < ApplicationController
   skip_before_action :authenticate_user!
   def get_events
-    event = HTTParty.get('http://api.eventful.com/json/events/search?app_key=Mfh6qpJgwmD7Gb59&where=london&keywords=davidhockney', {
+    p params
+    key = ENV["EVENTFUL_API_KEY"]
+    event = HTTParty.get("http://api.eventful.com/json/events/search?app_key=#{key}&keywords=#{params[:keyword]}", {
       headers: { 'Accept' => 'application/json'}
       }).parsed_response
-      puts event
+      p event
 
       render json: event if event
   end

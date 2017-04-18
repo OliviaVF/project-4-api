@@ -16,10 +16,12 @@ class PylonsController < ApplicationController
 
   # POST /pylons
   def create
+    puts pylon_params
+    puts listing_params
     @listing = Listing.find_by(google_place_id: listing_params[:google_place_id])
     @listing = Listing.create(listing_params) unless @listing
 
-    @pylon = Pylon.new(pylon_params)
+    @pylon = Pylon.new(params[:name], params[:category])
     @pylon.user = current_user
     @pylon.listing = @listing
 
