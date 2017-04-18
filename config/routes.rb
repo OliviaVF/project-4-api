@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'oauth/facebook'
 
   get 'authentications/register'
 
@@ -7,7 +8,11 @@ Rails.application.routes.draw do
   resources :users
   scope :api do
     resources :users, except: [:create]
+    resources :pylons
+    resources :listings
     post 'register', to: 'authentications#register'
     post 'login', to: 'authentications#login'
+    post 'auth/facebook', to: 'oauth#facebook'
+    get 'events', to: 'events#get_events'
   end
 end

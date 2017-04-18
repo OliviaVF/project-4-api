@@ -10,7 +10,6 @@ class Uploader
 
 
   def self.upload(params)
-
     image_data = split_base64(params[:base64])
 
     if image_data
@@ -32,6 +31,7 @@ class Uploader
       params[:image] = uploaded_file
       params.delete(:base64)
     end
+    p params
     return params
   end
 

@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  address: MyString
+  website: MyString
+  tel: MyString
+  lat: 1.5
+  lng: 1.5
+  exp_date: 2017-04-18
+
+two:
+  type: 
+  address: MyString
+  website: MyString
+  tel: MyString
+  lat: 1.5
+  lng: 1.5
+  exp_date: 2017-04-18
