@@ -16,14 +16,18 @@ class PylonsController < ApplicationController
 
   # POST /pylons
   def create
-    puts pylon_params
-    puts listing_params
+    p p
+
     @listing = Listing.find_by(google_place_id: listing_params[:google_place_id])
     @listing = Listing.create(listing_params) unless @listing
 
-    @pylon = Pylon.new(params[:name], params[:category])
+    p @listing
+
+    @pylon = Pylon.new(pylon_params)
     @pylon.user = current_user
     @pylon.listing = @listing
+
+    p @pylon
 
     if @pylon.save
       render json: @pylon, status: :created, location: @pylon
@@ -58,6 +62,6 @@ class PylonsController < ApplicationController
     end
 
     def listing_params
-      params.permit(:type_of_listing, :address, :website, :tel, :lat, :lng, :exp_date, :google_place_id, :name)
+      params.require(:pylon).permit(:type_of_listing, :address, :website, :tel, :lat, :lng, :exp_date, :google_place_id, :name)
     end
 end
