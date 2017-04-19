@@ -1,10 +1,10 @@
 class PylonsController < ApplicationController
   before_action :set_pylon, only: [:show, :update, :destroy]
-  skip_before_action :authenticate_user!
 
   # GET /pylons
   def index
-    @pylons = Pylon.all
+    @pylons = Pylon.of_followed_users(current_user.following)
+    @pylons = Pylon.for_user(current_user)
 
     render json: @pylons
   end
@@ -16,18 +16,13 @@ class PylonsController < ApplicationController
 
   # POST /pylons
   def create
-    p p
 
     @listing = Listing.find_by(google_place_id: listing_params[:google_place_id])
     @listing = Listing.create(listing_params) unless @listing
 
-    p @listing
-
     @pylon = Pylon.new(pylon_params)
     @pylon.user = current_user
     @pylon.listing = @listing
-
-    p @pylon
 
     if @pylon.save
       render json: @pylon, status: :created, location: @pylon
@@ -38,6 +33,7 @@ class PylonsController < ApplicationController
 
   # PATCH/PUT /pylons/1
   def update
+
     if @pylon.update(pylon_params)
       render json: @pylon
     else
