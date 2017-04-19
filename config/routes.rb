@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   get 'relationships/follow_user'
 
   get 'relationships/unfollow_user'
@@ -14,6 +15,7 @@ Rails.application.routes.draw do
     resources :users, except: [:create]
     resources :pylons
     resources :listings
+    resources :categories
     post 'register', to: 'authentications#register'
     post 'login', to: 'authentications#login'
     post 'auth/facebook', to: 'oauth#facebook'

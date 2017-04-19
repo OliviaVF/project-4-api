@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170419095933) do
+ActiveRecord::Schema.define(version: 20170419184506) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "follows", force: :cascade do |t|
     t.integer  "following_id", null: false
@@ -40,12 +46,13 @@ ActiveRecord::Schema.define(version: 20170419095933) do
   end
 
   create_table "pylons", force: :cascade do |t|
-    t.string   "category"
     t.text     "comment"
     t.integer  "user_id"
     t.integer  "listing_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "category_id"
+    t.index ["category_id"], name: "index_pylons_on_category_id", using: :btree
     t.index ["listing_id"], name: "index_pylons_on_listing_id", using: :btree
     t.index ["user_id"], name: "index_pylons_on_user_id", using: :btree
   end
@@ -61,6 +68,7 @@ ActiveRecord::Schema.define(version: 20170419095933) do
     t.bigint   "facebook_id"
   end
 
+  add_foreign_key "pylons", "categories"
   add_foreign_key "pylons", "listings"
   add_foreign_key "pylons", "users"
 end
