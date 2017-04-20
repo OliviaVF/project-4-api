@@ -4,9 +4,8 @@ class PylonsController < ApplicationController
   # GET /pylons
   def index
 
-    @pylons = Pylon.all
-    # @pylons = Pylon.of_followed_users(current_user.following)
-    # @pylons = Pylon.for_user(current_user)
+    # @pylons = Pylon.all
+    @pylons = Pylon.of_followed_users(current_user.following) + Pylon.for_user(current_user)
 
     render json: @pylons
   end

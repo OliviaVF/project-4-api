@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
-    render json: @user, include: ['pylons.listing', 'pylons.category', 'followers', 'following']
+    render json: @user, include: ['pylons.listing', 'pylons.category', 'followers', 'following', 'following.pylons.listing', 'following.pylons.category']
   end
 
   # POST /users
