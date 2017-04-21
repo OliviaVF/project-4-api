@@ -20,11 +20,12 @@ class OauthController < ApplicationController
         'Accept' => 'application/json'
       }
       }).parsed_response
-      p profile
 
-        user = User.where("email = :email OR facebook_id = :facebook_id", email: profile["email"], facebook_id: profile["id"]).first
+      puts profile["picture"]["data"]["url"]
 
-        user = User.new username: profile["name"], email: profile["email"], image:profile["picture"] unless user
+        user = User.where("email = :email OR facebook_id = :facebook_id", email: profile["email"], image:profile["picture"]["data"]["url"], facebook_id: profile["id"]).first
+
+        user = User.new username: profile["name"], email: profile["email"], image:profile["picture"]["data"]["url"] unless user
 
         user[:facebook_id] = profile["id"]
 
