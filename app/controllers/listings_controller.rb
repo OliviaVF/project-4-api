@@ -10,7 +10,7 @@ class ListingsController < ApplicationController
 
   # GET /listings/1
   def show
-    render json: @listing
+    render json: @listing, include: ['pylons.user']
   end
 
   # POST /listings
