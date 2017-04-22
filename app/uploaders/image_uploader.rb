@@ -14,4 +14,7 @@ class ImageUploader < CarrierWave::Uploader::Base
     nil
   end
 
+  def default_url
+    "/images/default_user.jpg"
+  end
 end

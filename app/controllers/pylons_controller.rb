@@ -61,7 +61,7 @@ class PylonsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def pylon_params
-      params.require(:pylon).permit(:comment, :category_id)
+      params.require(:pylon).permit(:comment, :category_id, :feed)
     end
 
     def listing_params
