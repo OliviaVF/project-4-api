@@ -29,7 +29,7 @@ module Project4Api
 
     config.middleware.insert_before 0, Rack::Cors do
     allow do
-      origins '*'
+      origins ['localhost:7000', 'https://powerful-tor-42435.herokuapp.com']
       resource '*', :headers => :any, :methods => :any
       end
     end
