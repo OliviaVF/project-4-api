@@ -27,7 +27,7 @@ class OauthController < ApplicationController
 
         user = User.new username: profile["name"], email: profile["email"], image:profile["picture"]["data"]["url"] unless user
 
-        user[:facebook_id] = profile["id"]
+        user["facebook_id"] = profile["id"]
 
         if user.save
           token = Auth.issue({ id: user.id })
